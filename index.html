@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="hi">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1" />
+	<title>WhatsApp-like — Stable Preview</title>
+	<link rel="stylesheet" href="globle.css" />
+</head>
+
+<body>
+	<div class="app" id="appRoot">
+		<aside class="sidebar">
+			<div class="top">
+				<div class="avatar">RK</div>
+				<div>
+					<div style="font-weight:700">Ravi Kushwah</div>
+					<div style="font-size:13px;color:var(--muted)">Available</div>
+				</div>
+			</div>
+			<div class="search"><input id="searchInput" placeholder="Search or start new chat" /></div>
+			<div class="chats" id="chatList"></div>
+		</aside>
+		<main class="main">
+			<div class="header">
+				<div class="info">
+					<div class="avatar" id="convAvatar">?</div>
+					<div>
+						<div class="name" id="convName">Select a chat</div>
+						<div class="status muted" id="convStatus">Tap a chat to start messaging</div>
+					</div>
+				</div>
+				<div style="margin-left:auto;display:flex;gap:8px;align-items:center">
+					<button id="voiceCall" class="small-btn" title="Voice call">📞</button>
+					<button id="videoCall" class="small-btn" title="Video call">🎥</button>
+				</div>
+			</div>
+			<section class="messages" id="messages">
+				<div class="empty muted" id="emptyHint">No chat selected — choose a chat on the left</div>
+			</section>
+			<div class="composer-wrap">
+				<div class="reply-preview" id="replyPreview">
+					<div style="display:flex;justify-content:space-between;align-items:center">
+						<div id="replyText" style="font-size:13px;color:#333"></div>
+						<button id="cancelReply" class="small-btn">✖</button>
+					</div>
+				</div>
+				<div class="attach-preview" id="attachPreview" style="display:none"></div>
+				<div class="compose-row">
+					<div style="display:flex;gap:8px;align-items:center">
+						<button id="attachBtn" class="small-btn" title="Attach">📎</button>
+						<input id="fileInput" type="file" multiple style="display:none" />
+						<button id="emojiBtn" class="small-btn" title="Emoji">😊</button>
+					</div>
+					<div class="compose-input"><input id="msgInput" placeholder="Type a message" autocomplete="off" />
+					</div>
+					<button id="sendBtn" class="btn">Send</button>
+				</div>
+				<div class="emoji-picker" id="emojiPicker"></div>
+			</div>
+		</main>
+	</div>
+	<div id="permissionNotice"
+		style="display:none;position:fixed;right:20px;top:20px;background:#fff8e1;padding:8px;border-radius:6px;border:1px solid #ffecb3">
+		Camera / Microphone permission denied or unavailable.</div>
+	<div class="modal" id="mediaModal" style="display:none">
+		<div class="box" id="modalBox"></div><button id="modalClose" class="small-btn">✕</button>
+	</div>
+	<div class="call-panel" id="callPanel" style="display:none">
+		<div style="display:flex;gap:8px;align-items:center;justify-content:space-between">
+			<div id="callTitle">Call</div>
+			<button id="endCall" class="small-btn">✖</button>
+		</div>
+		<div style="margin-top:8px">Local preview</div>
+		<video id="localPreview" class="video-small" autoplay muted playsinline></video>
+		<div style="margin-top:8px">Remote preview</div>
+		<video id="remotePreview" class="video-small" autoplay playsinline></video>
+	</div>
+	<div class="log-panel" id="logPanel" aria-live="polite" style="display:none"></div>
+	<script src="app.jsx"></script>
+</body>
+</html>
